@@ -1,0 +1,47 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    flex-wrap: wrap;
+    background-color: #020720;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    background: rgb(34, 63, 102);
+    background: linear-gradient(90deg, rgba(34, 63, 102, 1) 9%, rgba(23, 224, 154, 1) 45%);
+    border-radius: 1rem;
+    flex-wrap: wrap;
+    padding-top: 3rem;
+}
+
+.message h1 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.message p {
+    color: #ffffff;
+    font-size: 16px;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 5rem;
+    font-weight: 400;
+}
