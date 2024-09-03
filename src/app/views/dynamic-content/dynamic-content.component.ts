@@ -1,38 +1,56 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TemplateService } from '../../services/template.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dynamic-content',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './dynamic-content.component.html',
-  styleUrl: './dynamic-content.component.scss',
+  styleUrls: ['./dynamic-content.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class DynamicContentComponent implements OnInit {
 
-  constructor(private templateService: TemplateService) { }
-
-  htmlContent: string = '';
+  htmlContent: SafeHtml = '';
   title: string = '';
-  content: string = ''
+  content: string = '';
+  backgroundImage: string = '';
 
+  constructor(private templateService: TemplateService, private sanitizer: DomSanitizer) { }
   ngOnInit(): void {
-    this.title = `Coding Journey`
-    this.content = `Learning to code has been an exciting and rewarding journey. Starting from simple programs to building full-fledged applications, I've developed problem-solving skills and a deeper understanding of how technology shapes our world. The more I learn, the more fascinated I become with the endless possibilities.`
-    
-    this.htmlContent = this.templateService.getTemplate(this.title, this.content)
+    this.title = 'Coding Journey';
 
+    this.content = `Learning to code has been an exciting and rewarding journey. 
+                    Starting from simple programs to building full-fledged applications, 
+                    I've developed problem-solving skills and a deeper understanding of 
+                    how technology shapes our world. The more I learn, the more fascinated 
+                    I become with the endless possibilities.`;
+    this.updateData();
   }
 
-   // Below commented code is for taking multiple example
+  updateData(): void {
+    const rawHtml = this.templateService.getTemplate(this.title, this.content, this.backgroundImage);
+    this.htmlContent = this.sanitizer.bypassSecurityTrustHtml(rawHtml);
+  }
 
-    // this.title = `Mountain Adventure`
-    // this.content = `Exploring the mountains has been one of the most thrilling experiences of my life. From the crisp air to the breathtaking views, each hike has brought new challenges and rewards. I've learned the importance of preparation, endurance, and respecting nature along the way.`
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
 
-    // this.title = `Dance Journey`
-    // this.content = `Starting dance in high school has been awesome and really eye-opening. I've learned so much
-    // from the basic moves to performing on stage, and its been fun and challenging. Its also been a cool way
-    // to get fit and learn about different types of dances and their backgrounds.`
+    if (input.files && input.files.length > 0) {
+      const file: File = input.files[0];
+      const reader = new FileReader();
 
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target) {
+          this.backgroundImage = e.target.result as string;
+          this.updateData();
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
 }

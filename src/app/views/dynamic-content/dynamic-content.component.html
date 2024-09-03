@@ -1,2 +1,21 @@
+<div class="main-container">
+    <div [innerHTML]="htmlContent" class="innerHtml"></div>
 
-<div [innerHTML]="htmlContent"></div>
+    <div class="input-content">
+        <div class="title-content">
+            <h4>Title*</h4>
+            <textarea id="title" (input)="updateData()" [(ngModel)]="title" name="title" rows="4" cols="50"></textarea>
+        </div>
+
+        <div class="description-content">
+            <h4>Description*</h4>
+            <textarea id="description" (input)="updateData()" [(ngModel)]="content" name="description" rows="8"
+                cols="50"></textarea>
+        </div>
+
+        <div class="image-content">
+            <h4>Background Image*</h4>
+            <input type="file" id="backgroundImage" (change)="onFileSelected($event)" />
+        </div>
+    </div>
+</div>
