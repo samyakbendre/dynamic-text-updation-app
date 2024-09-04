@@ -23,11 +23,7 @@ export class DynamicContentComponent implements OnInit {
   ngOnInit(): void {
     this.title = 'Coding Journey';
 
-    this.content = `Learning to code has been an exciting and rewarding journey. 
-                    Starting from simple programs to building full-fledged applications, 
-                    I've developed problem-solving skills and a deeper understanding of 
-                    how technology shapes our world. The more I learn, the more fascinated 
-                    I become with the endless possibilities.`;
+    this.content = `Learning to code has been an exciting and rewarding journey. Starting from simple programs to building full-fledged applications,I've developed problem-solving skills and a deeper understanding of how technology shapes our world. The more I learn, the more fascinated I become with the endless possibilities.`;
     this.updateData();
   }
 

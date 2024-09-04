@@ -13,6 +13,10 @@ body {
   line-height: 1.6;
 }
 
+.container{
+  overflow: auto;
+}
+
 .main-container {
   display: flex;
   flex-direction: row;
@@ -34,6 +38,8 @@ body {
   border-radius: 1rem;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
   margin-right: 5%;
+  overflow: auto;
+  max-height: 70vh;
 }
 
 .message {
@@ -94,9 +100,7 @@ input[type="file"] {
 
 textarea:focus,
 input[type="file"]:focus {
-  border-color: #23e09a;
   outline: none;
-  box-shadow: 0 0 5px rgba(23, 224, 154, 0.5);
 }
 
 textarea {
